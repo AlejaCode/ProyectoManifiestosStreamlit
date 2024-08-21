@@ -8,13 +8,13 @@ from googleapiclient.http import MediaIoBaseDownload
 
 # Configuración de Google Drive
 SCOPES = ['https://www.googleapis.com/auth/drive']
-SERVICE_ACCOUNT_FILE = 'proyecto1-430922-ca6a81cafa8a.json'
+SERVICE_ACCOUNT_FILE = 'project1-39350-fe86069a4f59.json'
 
 creds = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
 service = build('drive', 'v3', credentials=creds)
-folder_id = '1BUBFLWLoWe3ibeTuznwfJ5CBJmb4CmxC'
+folder_id = '1muKwlqdqooWIkC9WmkV-O7P2twyc1404'
 
 # Función para buscar texto en PDFs
 def search_text_in_pdf(pdf_file_id, text):
