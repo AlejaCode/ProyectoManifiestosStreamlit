@@ -5,16 +5,20 @@ from google.oauth2 import service_account
 import io
 import PyPDF2
 from googleapiclient.http import MediaIoBaseDownload
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
 
 # Configuración de Google Drive
 SCOPES = ['https://www.googleapis.com/auth/drive']
-SERVICE_ACCOUNT_FILE = 'project1-39350-fe86069a4f59.json'
+SERVICE_ACCOUNT_FILE = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
 creds = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
 service = build('drive', 'v3', credentials=creds)
-folder_id = '1muKwlqdqooWIkC9WmkV-O7P2twyc1404'
+folder_id = os.getenv('FOLDER_ID')
 
 # Función para buscar texto en PDFs
 def search_text_in_pdf(pdf_file_id, text):
