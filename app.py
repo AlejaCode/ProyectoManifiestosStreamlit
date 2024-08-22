@@ -9,16 +9,6 @@ from dotenv import load_dotenv
 from cryptography.fernet import Fernet
 import tempfile
 
-# Ocultar el botón "Manage app"
-hide_streamlit_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            .css-1v3fvcr {display: none !important;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # Ocultar la barra de herramientas superior (que incluye "Share", "Star", y GitHub)
 hide_streamlit_style = """
