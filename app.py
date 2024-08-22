@@ -17,7 +17,7 @@ encryption_key = os.getenv('ENCRYPTION_KEY').encode()
 fernet = Fernet(encryption_key)
 
 # Leer el archivo de credenciales encriptado
-with open('proyecto1-39350-fe86069a4f59.encrypted', 'rb') as encrypted_file:
+with open('project1-39350-fe86069a4f59.encrypted', 'rb') as encrypted_file:
     encrypted_data = encrypted_file.read()
 
 # Desencriptar el archivo
