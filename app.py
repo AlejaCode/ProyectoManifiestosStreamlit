@@ -78,7 +78,7 @@ def create_shareable_link(file_id):
 col1, col2 = st.columns(2)
 with col1:
     # logo de la empresa
-    st.image("logo.png", width=300)
+    st.image("Logo.png", width=300)
 
 with col2: 
     # Streamlit UI
