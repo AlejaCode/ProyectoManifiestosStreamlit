@@ -17,7 +17,7 @@ encryption_key = os.getenv('ENCRYPTION_KEY').encode()
 fernet = Fernet(encryption_key)
 
 
-file_path = 'proyecto1-39350-fe86069a4f59.encrypted'
+file_path = 'project1-39350-fe86069a4f59.encrypted'
 
 # Imprime el directorio actual para asegurarte de que estás buscando en el lugar correcto
 current_dir = os.getcwd()
@@ -38,7 +38,7 @@ with open('project1-39350-fe86069a4f59.encrypted', 'rb') as encrypted_file:
 decrypted_data = fernet.decrypt(encrypted_data)    
 
 # Guardar temporalmente el archivo desencriptado en el sistema
-with open('/tmp/proyecto1-39350-fe86069a4f59.json', 'wb') as decrypted_file:
+with open('/tmp/project1-39350-fe86069a4f59.json', 'wb') as decrypted_file:
     decrypted_file.write(decrypted_data)
 
 # Configuración de Google Drive
@@ -46,7 +46,7 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 
 # Usar el archivo desencriptado para obtener las credenciales
 creds = service_account.Credentials.from_service_account_file(
-    '/tmp/proyecto1-39350-fe86069a4f59.json', scopes=SCOPES)
+    '/tmp/project1-39350-fe86069a4f59.json', scopes=SCOPES)
 
 service = build('drive', 'v3', credentials=creds)
 folder_id = os.getenv('FOLDER_ID')
