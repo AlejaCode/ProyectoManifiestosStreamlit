@@ -1,0 +1,11 @@
+[browser]
+gatherUsageStats = false
+
+[theme]
+base="light"
+
+[server]
+enableXsrfProtection=false
+
+[global]
+showToolbar = false
