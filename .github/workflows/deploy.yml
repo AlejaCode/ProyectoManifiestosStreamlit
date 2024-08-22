@@ -25,7 +25,7 @@ jobs:
 
     - name: Run the application
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
         FOLDER_ID: ${{ secrets.FOLDER_ID }}
       run: |
         streamlit run app.py

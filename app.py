@@ -6,16 +6,33 @@ import io
 import PyPDF2
 from googleapiclient.http import MediaIoBaseDownload
 from dotenv import load_dotenv
+from cryptography.fernet import Fernet
+import tempfile
 
-# Cargar variables de entorno
+# Cargar variables de entorno desde el archivo .env
 load_dotenv()
+
+# Obtener la clave de encriptación
+encryption_key = os.getenv('ENCRYPTION_KEY')
+fernet = Fernet(encryption_key)
+
+# Leer el archivo de credenciales encriptado
+with open('proyecto1-39350-fe86069a4f59.encrypted', 'rb') as encrypted_file:
+    encrypted_data = encrypted_file.read()
+
+# Desencriptar el archivo
+decrypted_data = fernet.decrypt(encrypted_data)    
+
+# Guardar temporalmente el archivo desencriptado en el sistema
+with open('/tmp/proyecto1-39350-fe86069a4f59.json', 'wb') as decrypted_file:
+    decrypted_file.write(decrypted_data)
 
 # Configuración de Google Drive
 SCOPES = ['https://www.googleapis.com/auth/drive']
-SERVICE_ACCOUNT_FILE = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
+# Usar el archivo desencriptado para obtener las credenciales
 creds = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    '/tmp/proyecto1-39350-fe86069a4f59.json', scopes=SCOPES)
 
 service = build('drive', 'v3', credentials=creds)
 folder_id = os.getenv('FOLDER_ID')

@@ -2,3 +2,7 @@ streamlit
 google-api-python-client
 google-auth
 PyPDF2
+cryptography
+python-dotenv
+google-auth-oauthlib
+google-auth-httplib
