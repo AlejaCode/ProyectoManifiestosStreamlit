@@ -16,6 +16,20 @@ load_dotenv()
 encryption_key = os.getenv('ENCRYPTION_KEY').encode()
 fernet = Fernet(encryption_key)
 
+
+file_path = 'proyecto1-39350-fe86069a4f59.encrypted'
+
+# Imprime el directorio actual para asegurarte de que estás buscando en el lugar correcto
+current_dir = os.getcwd()
+st.write(f"Directorio actual de trabajo: {current_dir}")
+
+# Verifica si el archivo existe
+if os.path.exists(file_path):
+    st.success(f"El archivo '{file_path}' se encuentra en la ruta esperada.")
+else:
+    st.error(f"El archivo '{file_path}' no se encuentra en la ruta esperada.")
+
+
 # Leer el archivo de credenciales encriptado
 with open('project1-39350-fe86069a4f59.encrypted', 'rb') as encrypted_file:
     encrypted_data = encrypted_file.read()
