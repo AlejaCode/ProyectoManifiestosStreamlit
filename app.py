@@ -13,7 +13,7 @@ import tempfile
 load_dotenv()
 
 # Obtener la clave de encriptación
-encryption_key = os.getenv('ENCRYPTION_KEY')
+encryption_key = os.getenv('ENCRYPTION_KEY').encode()
 fernet = Fernet(encryption_key)
 
 # Leer el archivo de credenciales encriptado
