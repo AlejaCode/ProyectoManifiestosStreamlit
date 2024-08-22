@@ -84,7 +84,7 @@ with col2:
     # Streamlit UI
     st.write("   ")
     st.write("   ")
-    st.title("MANIFIESTOS DE IMPORTACION")
+    st.title("MANIFIESTOS DE IMPORTACIÓN")
 
 
 # Campo para ingresar el texto a buscar
