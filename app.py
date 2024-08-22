@@ -9,6 +9,16 @@ from dotenv import load_dotenv
 from cryptography.fernet import Fernet
 import tempfile
 
+# Ocultar la barra de herramientas superior (que incluye "Share", "Star", y GitHub)
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
