@@ -40,8 +40,13 @@ st.markdown(
 st.markdown("""
     <script>
     function focusInput() {
-        document.getElementById('search_input').focus();
+        var inputElement = document.getElementById('search_input');
+        if(inputElement) {
+            inputElement.focus();  // Colocar el cursor en el cuadro de texto
+        }
     }
+    // Ejecuta la función para enfocar el campo cuando se carga la página
+    window.onload = focusInput;
     </script>
     """, unsafe_allow_html=True)
 
@@ -140,7 +145,7 @@ if st.session_state['search_screen']:
     st.markdown(f"<h5 style='font-size:16px;'>Buscar en {st.session_state['search_screen']}</h5>", unsafe_allow_html=True)
   
 # Campo para ingresar el texto a buscar
-search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
+search_text = st.text_input("Por favor, ingresa el texto que deseas buscar", key="search_input")
 
 col1, col2, col3 = st.columns([3,1,3])
 if col2.button("Buscar"):
