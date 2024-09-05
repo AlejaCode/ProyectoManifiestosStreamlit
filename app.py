@@ -103,13 +103,13 @@ if st.button("Abrir logos"):
         st.write("Haz clic en un logo para ir a la pantalla de búsqueda")
         col1, col2, col3 = st.columns(3)
         with col1:
-            if st.image("FLY-ENERGY-LOGO.png", width=100):
+            if st.image("FLY-ENERGY-LOGO.png", width=300):
                 st.session_state['search_screen'] = True
         with col2:
-            if st.image("FLY-SOUND-LOGO.png", width=100):
+            if st.image("FLY-SOUND-LOGO.png", width=300):
                 st.session_state['search_screen'] = True
         with col3:
-            if st.image("FLY-TECH-LOGO.png", width=100):
+            if st.image("FLY-TECH-LOGO.png", width=300):
                 st.session_state['search_screen'] = True
 
 # Si se ha seleccionado un logo, se muestra la pantalla de búsqueda                
