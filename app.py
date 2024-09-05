@@ -97,12 +97,29 @@ with col2:
     st.write("   ")
     st.title("MANIFIESTOS DE IMPORTACIÓN")
 
+# Botón para abrir la ventana modal
+if st.button("Abrir logos"):
+    with st.modal("Selecciona un logo para continuar"):
+        st.write("Haz clic en un logo para ir a la pantalla de búsqueda")
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.image("FLY-ENERGY-LOGO.png", width=100):
+                st.session_state['search_screen'] = True
+        with col2:
+            if st.image("FLY-SOUND-LOGO.png", width=100):
+                st.session_state['search_screen'] = True
+        with col3:
+            if st.image("FLY-TECH-LOGO.png", width=100):
+                st.session_state['search_screen'] = True
+
+# Si se ha seleccionado un logo, se muestra la pantalla de búsqueda                
 
 # Campo para ingresar el texto a buscar
-search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
 
-col1, col2, col3 = st.columns([3,1,3])
-if col2.button("Buscar"):
+if st.session_state.get('search_screen', False):
+   search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
+   col1, col2, col3 = st.columns([3,1,3])
+   if col2.button("Buscar"):
     # Listar archivos PDF en la carpeta de Google Drive
     results = service.files().list(q=f"'{folder_id}' in parents",
                                    spaces='drive',
