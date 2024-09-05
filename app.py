@@ -85,19 +85,33 @@ def create_shareable_link(file_id):
     except Exception as e:
         st.error(f"Error creating shareable link for file {file_id}: {e}")
         return None
-    
-col1, col2 = st.columns(2)
+
+# Inicializar la sesión para la pantalla de búsqueda
+if 'search_screen' not in st.session_state:
+    st.session_state['search_screen'] = None
+
+# Título centrado en la parte superior
+st.markdown("<h1 style='text-align: center;'>MANIFIESTOS DE IMPORTACIÓN</h1>", unsafe_allow_html=True)
+
+# Mostrar los logos en una fila
+col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    # logo de la empresa
-    st.image("Logo.png", width=300)
+    if st.image("FLY-ENERGY-LOGO.png", use_column_width=True):
+     if st.button("Fly Energy"):
+        st.session_state['search_screen'] = "Fly Energy"
+with col2:
+    if st.image("FLY-SOUND-LOGO.png", use_column_width=True):
+      if st.button("Fly Sound"):
+        st.session_state['search_screen'] = "Fly Sound"
+with col3:
+    if st.image("FLY-TECH-LOGO.png", use_column_width=True):
+       if st.button("Fly Tech"):
+        st.session_state['search_screen'] = "Fly Tech"
 
-with col2: 
-    # Streamlit UI
-    st.write("   ")
-    st.write("   ")
-    st.title("MANIFIESTOS DE IMPORTACIÓN")
-
-
+# Mostrar la pantalla de búsqueda cuando se selecciona un logo
+if st.session_state['search_screen']:
+    st.subheader(f"Buscar en {st.session_state['search_screen']}")
+  
 # Campo para ingresar el texto a buscar
 search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
 
