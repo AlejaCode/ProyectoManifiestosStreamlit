@@ -117,7 +117,7 @@ if 'search_screen' not in st.session_state:
 
 # Título centrado en la parte superior
 st.markdown("""
-    <h3 style='text-align: center; margin-top: 0px;'>MANIFIESTOS DE IMPORTACIÓN</h3>
+    <h4 style='text-align: center; margin-top: 0px;'>MANIFIESTOS DE IMPORTACIÓN</h4>
     """, unsafe_allow_html=True)
 
 # Mostrar los logos en una fila
