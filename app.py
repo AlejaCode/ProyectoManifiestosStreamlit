@@ -123,21 +123,21 @@ st.markdown("""
 # Mostrar los logos en una fila
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    if st.image("FLY-ENERGY-LOGO.png", use_column_width=True):
+    if st.image("FLY-ENERGY-LOGO.png", use_column_width=False, width=200):
      if st.button("Fly Energy"):
         st.session_state['search_screen'] = "Fly Energy"
 with col2:
-    if st.image("FLY-SOUND-LOGO.png", use_column_width=True):
+    if st.image("FLY-SOUND-LOGO.png", use_column_width=False, width=200):
       if st.button("Fly Sound"):
         st.session_state['search_screen'] = "Fly Sound"
 with col3:
-    if st.image("FLY-TECH-LOGO.png", use_column_width=True):
+    if st.image("FLY-TECH-LOGO.png", use_column_width=False, width=200):
        if st.button("Fly Tech"):
         st.session_state['search_screen'] = "Fly Tech"
 
 # Mostrar la pantalla de búsqueda cuando se selecciona un logo
 if st.session_state['search_screen']:
-    st.markdown(f"<h4 style='font-size:16px;'>Buscar en {st.session_state['search_screen']}</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h5 style='font-size:16px;'>Buscar en {st.session_state['search_screen']}</h5>", unsafe_allow_html=True)
   
 # Campo para ingresar el texto a buscar
 search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
