@@ -20,6 +20,22 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+# CSS para centrar los botones
+st.markdown(
+    """
+    <style>
+    div.stButton > button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px auto; /* Ajustar margen para centrar los botones */
+        width: 150px; /* Ajustar el ancho de los botones si es necesario */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
