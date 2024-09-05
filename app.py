@@ -36,6 +36,15 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Insertar JavaScript para poner el cursor en el cuadro de búsqueda
+st.markdown("""
+    <script>
+    function focusInput() {
+        document.getElementById('search_input').focus();
+    }
+    </script>
+    """, unsafe_allow_html=True)
+
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
