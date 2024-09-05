@@ -85,7 +85,11 @@ def create_shareable_link(file_id):
     except Exception as e:
         st.error(f"Error creating shareable link for file {file_id}: {e}")
         return None
-    
+
+# Inicializar la sesión para la pantalla de búsqueda
+if 'search_screen' not in st.session_state:
+    st.session_state['search_screen'] = False
+
 col1, col2 = st.columns(2)
 with col1:
     # logo de la empresa
