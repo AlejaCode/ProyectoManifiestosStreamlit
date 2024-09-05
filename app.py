@@ -91,7 +91,9 @@ if 'search_screen' not in st.session_state:
     st.session_state['search_screen'] = None
 
 # Título centrado en la parte superior
-st.markdown("<h1 style='text-align: center;'>MANIFIESTOS DE IMPORTACIÓN</h1>", unsafe_allow_html=True)
+st.markdown("""
+    <h3 style='text-align: center; margin-top: 0px;'>MANIFIESTOS DE IMPORTACIÓN</h3>
+    """, unsafe_allow_html=True)
 
 # Mostrar los logos en una fila
 col1, col2, col3 = st.columns([1, 1, 1])
