@@ -102,13 +102,12 @@ with col2:
     st.title("MANIFIESTOS DE IMPORTACIÓN")
 
 # Botón para abrir la ventana modal
-if st.button("Abrir logos"):
-    with st.modal("Selecciona un logo para continuar"):
+with st.expander("Selecciona un logo para continuar"):
         st.write("Haz clic en un logo para ir a la pantalla de búsqueda")
         col1, col2, col3 = st.columns(3)
         with col1:
-            if st.image("FLY-ENERGY-LOGO.png", width=300):
-                st.session_state['search_screen'] = True
+            if st.button("Fly Energy"):
+               st.session_state['search_screen'] = True
         with col2:
             if st.image("FLY-SOUND-LOGO.png", width=300):
                 st.session_state['search_screen'] = True
