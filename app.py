@@ -137,7 +137,7 @@ with col3:
 
 # Mostrar la pantalla de búsqueda cuando se selecciona un logo
 if st.session_state['search_screen']:
-    st.subheader(f"Buscar en {st.session_state['search_screen']}")
+    st.markdown(f"<h4 style='font-size:16px;'>Buscar en {st.session_state['search_screen']}</h4>", unsafe_allow_html=True)
   
 # Campo para ingresar el texto a buscar
 search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
