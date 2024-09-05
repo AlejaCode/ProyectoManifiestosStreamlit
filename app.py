@@ -85,11 +85,7 @@ def create_shareable_link(file_id):
     except Exception as e:
         st.error(f"Error creating shareable link for file {file_id}: {e}")
         return None
-
-# Inicializar la sesión para la pantalla de búsqueda
-if 'search_screen' not in st.session_state:
-    st.session_state['search_screen'] = False
-
+    
 col1, col2 = st.columns(2)
 with col1:
     # logo de la empresa
@@ -101,32 +97,14 @@ with col2:
     st.write("   ")
     st.title("MANIFIESTOS DE IMPORTACIÓN")
 
-# Botón para seleccionar el logo y mostrar el cuadro de búsqueda
-st.write("Selecciona un logo para iniciar la búsqueda")
-col1, col2, col3 = st.columns(3)
-with col1:
-    if st.button("Fly Energy"):
-        st.session_state['search_screen'] = True
 
-with col2:
-    if st.image("FLY-SOUND-LOGO.png", width=300):
-        st.session_state['search_screen'] = True
+# Campo para ingresar el texto a buscar
+search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
 
-with col3:
-    if st.image("FLY-TECH-LOGO.png", width=300):
-        st.session_state['search_screen'] = True
-# Si se ha seleccionado un logo, se muestra la pantalla de búsqueda                
-
-# Mostrar el título "MANIFIESTOS DE IMPORTACIÓN" y el cuadro de búsqueda después de seleccionar un logo
-if st.session_state.get('search_screen', False):
-    st.subheader("MANIFIESTOS DE IMPORTACIÓN")
-    search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
-    
-    col1, col2, col3 = st.columns([3,1,3])
-    if col2.button("Buscar"):
-        if search_text:
+col1, col2, col3 = st.columns([3,1,3])
+if col2.button("Buscar"):
     # Listar archivos PDF en la carpeta de Google Drive
-            results = service.files().list(q=f"'{folder_id}' in parents",
+    results = service.files().list(q=f"'{folder_id}' in parents",
                                    spaces='drive',
                                    fields='nextPageToken, files(id, name)').execute()
     items = results.get('files', [])
