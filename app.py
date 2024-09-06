@@ -127,17 +127,17 @@ def search_pdf(logo):
                 matching_pdfs.append(item)
 
         if matching_pdfs:
-            st.success(f"Se encontraron {len(matching_pdfs)} PDFs que contienen el texto específico.")
+            st.success(f"Se encontraron {len(matching_pdfs)} Manifiestos que contienen el texto específico.")
             for item in matching_pdfs:
                 shareable_link = create_shareable_link(item['id'])
                 if shareable_link:
                   st.write(f"[{item['name']}]({shareable_link})")
-            else:
+                else:
                   st.warning(f"No se pudo generar un link compartido para {item['name']}")
         else:
              st.warning("No se encontraron PDFs que contengan el texto especificado.")
              
-        st.write(f"Buscando '{search_text}'  {logo}...")
+        st.write(f"Buscando '{search_text}'  {logo}")
         # Simulación de búsqueda: actualiza el estado de la sesión con los resultados
         st.session_state.search_result = {"logo": logo, "text": search_text}
         st.session_state.modal_open = True  # Cerrar la ventana modal después de buscar
