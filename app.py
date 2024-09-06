@@ -36,19 +36,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Insertar JavaScript para poner el cursor en el cuadro de búsqueda
-def set_focus_on_search_input():
-    st.markdown("""
-        <script>
-        function focusInput() {
-            var inputElement = document.getElementById('search_input');
-            if(inputElement) {
-                inputElement.focus();
-            }
-        }
-        focusInput();
-        </script>
-        """, unsafe_allow_html=True)
+
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
@@ -115,6 +103,45 @@ def create_shareable_link(file_id):
     except Exception as e:
         st.error(f"Error creating shareable link for file {file_id}: {e}")
         return None
+    
+#Crea ventana     
+@st.dialog("Manifiestos de Importación")
+
+def search_pdf(logo):
+    st.write(f"Buscando en {logo}")
+    # Campo para ingresar el texto a buscar
+    search_text = st.text_input("Por favor, ingresa el texto que deseas buscar")
+
+    col1, col2, col3 = st.columns([3,1,3])
+    if st.button("Buscar"):
+            # Listar archivos PDF en la carpeta de Google Drive
+        results = service.files().list(q=f"'{folder_id}' in parents",
+                                   spaces='drive',
+                                   fields='nextPageToken, files(id, name)').execute()
+        items = results.get('files', [])
+
+        matching_pdfs = []
+        for item in items:
+            if item['name'].endswith('.pdf'):
+               if search_text_in_pdf(item['id'], search_text):
+                matching_pdfs.append(item)
+
+        if matching_pdfs:
+            st.success(f"Se encontraron {len(matching_pdfs)} PDFs que contienen el texto específico.")
+            for item in matching_pdfs:
+                shareable_link = create_shareable_link(item['id'])
+                if shareable_link:
+                  st.write(f"[{item['name']}]({shareable_link})")
+            else:
+                  st.warning(f"No se pudo generar un link compartido para {item['name']}")
+        else:
+             st.warning("No se encontraron PDFs que contengan el texto especificado.")
+             
+        st.write(f"Buscando '{search_text}' en los PDFs de {logo}...")
+        # Simulación de búsqueda: actualiza el estado de la sesión con los resultados
+        st.session_state.search_result = {"logo": logo, "text": search_text}
+        st.rerun()
+
 
 # Inicializar la sesión para la pantalla de búsqueda
 if 'search_screen' not in st.session_state:
@@ -130,49 +157,27 @@ col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     if st.image("FLY-ENERGY-LOGO.png", use_column_width=False, width=200):
      if st.button("Fly Energy"):
-        st.session_state['search_screen'] = "Fly Energy"
-        set_focus_on_search_input()  # Colocar el cursor en el cuadro de búsqueda
+        search_pdf("Fly Energy")
+       
 
 with col2:
     if st.image("FLY-SOUND-LOGO.png", use_column_width=False, width=200):
       if st.button("Fly Sound"):
-        st.session_state['search_screen'] = "Fly Sound"
-        set_focus_on_search_input()  # Colocar el cursor en el cuadro de búsqueda
+         search_pdf("Fly Sound")
+     
 
 with col3:
     if st.image("FLY-TECH-LOGO.png", use_column_width=False, width=200):
        if st.button("Fly Tech"):
-        st.session_state['search_screen'] = "Fly Tech"
-        set_focus_on_search_input()  # Colocar el cursor en el cuadro de búsqueda
+          search_pdf("Fly Tech")
+      
+else:
+    # Mostrar el resultado de la búsqueda si ya fue realizada
+    st.write(f"Resultados de búsqueda en {st.session_state.search_result['logo']}")
+    st.write(f"Texto buscado: {st.session_state.search_result['text']}")
+
 
 # Mostrar la pantalla de búsqueda cuando se selecciona un logo
 if st.session_state['search_screen']:
     st.markdown(f"<h5 style='font-size:16px;'>Buscar en {st.session_state['search_screen']}</h5>", unsafe_allow_html=True)
   
-# Campo para ingresar el texto a buscar
-search_text = st.text_input("Por favor, ingresa el texto que deseas buscar", key="search_input")
-
-col1, col2, col3 = st.columns([3,1,3])
-if col2.button("Buscar"):
-    # Listar archivos PDF en la carpeta de Google Drive
-    results = service.files().list(q=f"'{folder_id}' in parents",
-                                   spaces='drive',
-                                   fields='nextPageToken, files(id, name)').execute()
-    items = results.get('files', [])
-
-    matching_pdfs = []
-    for item in items:
-        if item['name'].endswith('.pdf'):
-            if search_text_in_pdf(item['id'], search_text):
-                matching_pdfs.append(item)
-
-    if matching_pdfs:
-        st.success(f"Se encontraron {len(matching_pdfs)} PDFs que contienen el texto específico.")
-        for item in matching_pdfs:
-            shareable_link = create_shareable_link(item['id'])
-            if shareable_link:
-                st.write(f"[{item['name']}]({shareable_link})")
-            else:
-                st.warning(f"No se pudo generar un link compartido para {item['name']}")
-    else:
-        st.warning("No se encontraron PDFs que contengan el texto especificado.")
