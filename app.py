@@ -140,7 +140,7 @@ def search_pdf(logo):
         st.write(f"Buscando '{search_text}' en los PDFs de {logo}...")
         # Simulación de búsqueda: actualiza el estado de la sesión con los resultados
         st.session_state.search_result = {"logo": logo, "text": search_text}
-        st.rerun()
+        st.session_state.modal_open = True  # Cerrar la ventana modal después de buscar
 
 
 # Inicializar la sesión para la pantalla de búsqueda
@@ -171,6 +171,7 @@ with col3:
        if st.button("Fly Tech"):
           search_pdf("Fly Tech")
       
+
 
 # Mostrar la pantalla de búsqueda cuando se selecciona un logo
 if st.session_state['search_screen']:
