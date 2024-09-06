@@ -37,18 +37,18 @@ st.markdown(
 )
 
 # Insertar JavaScript para poner el cursor en el cuadro de búsqueda
-st.markdown("""
-    <script>
-    function focusInput() {
-        var inputElement = document.getElementById('search_input');
-        if(inputElement) {
-            inputElement.focus();  // Colocar el cursor en el cuadro de texto
+def set_focus_on_search_input():
+    st.markdown("""
+        <script>
+        function focusInput() {
+            var inputElement = document.getElementById('search_input');
+            if(inputElement) {
+                inputElement.focus();
+            }
         }
-    }
-    // Ejecuta la función para enfocar el campo cuando se carga la página
-    window.onload = focusInput;
-    </script>
-    """, unsafe_allow_html=True)
+        focusInput();
+        </script>
+        """, unsafe_allow_html=True)
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
@@ -131,14 +131,19 @@ with col1:
     if st.image("FLY-ENERGY-LOGO.png", use_column_width=False, width=200):
      if st.button("Fly Energy"):
         st.session_state['search_screen'] = "Fly Energy"
+        set_focus_on_search_input()  # Colocar el cursor en el cuadro de búsqueda
+
 with col2:
     if st.image("FLY-SOUND-LOGO.png", use_column_width=False, width=200):
       if st.button("Fly Sound"):
         st.session_state['search_screen'] = "Fly Sound"
+        set_focus_on_search_input()  # Colocar el cursor en el cuadro de búsqueda
+
 with col3:
     if st.image("FLY-TECH-LOGO.png", use_column_width=False, width=200):
        if st.button("Fly Tech"):
         st.session_state['search_screen'] = "Fly Tech"
+        set_focus_on_search_input()  # Colocar el cursor en el cuadro de búsqueda
 
 # Mostrar la pantalla de búsqueda cuando se selecciona un logo
 if st.session_state['search_screen']:
