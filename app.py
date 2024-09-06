@@ -137,7 +137,7 @@ def search_pdf(logo):
         else:
              st.warning("No se encontraron PDFs que contengan el texto especificado.")
              
-        st.write(f"Buscando '{search_text}' en los PDFs de {logo}...")
+        st.write(f"Buscando '{search_text}'  {logo}...")
         # Simulación de búsqueda: actualiza el estado de la sesión con los resultados
         st.session_state.search_result = {"logo": logo, "text": search_text}
         st.session_state.modal_open = True  # Cerrar la ventana modal después de buscar
