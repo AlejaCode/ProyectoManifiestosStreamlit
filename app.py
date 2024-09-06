@@ -171,11 +171,6 @@ with col3:
        if st.button("Fly Tech"):
           search_pdf("Fly Tech")
       
-else:
-    # Mostrar el resultado de la búsqueda si ya fue realizada
-    st.write(f"Resultados de búsqueda en {st.session_state.search_result['logo']}")
-    st.write(f"Texto buscado: {st.session_state.search_result['text']}")
-
 
 # Mostrar la pantalla de búsqueda cuando se selecciona un logo
 if st.session_state['search_screen']:
