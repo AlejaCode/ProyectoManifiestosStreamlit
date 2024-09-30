@@ -39,8 +39,9 @@ st.markdown(
 )
 
 def clean_text(text):
-    # Reemplazar guiones y otros caracteres similares por espacios
-    return re.sub(r'[\-\u2010\u2011\u2012\u2013\u2014\u2015]', ' ', text)
+    # Remover todos los guiones o caracteres similares en el texto
+    return re.sub(r'[\-\u2010\u2011\u2012\u2013\u2014\u2015]', '', text)
+
 
 
 # Cargar variables de entorno desde el archivo .env
