@@ -8,6 +8,8 @@ from googleapiclient.http import MediaIoBaseDownload
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet
 import tempfile
+import re  # Esto te permite trabajar con expresiones regulares para limpiar los guiones
+
 
 
 # Ocultar la barra de herramientas superior (que incluye "Share", "Star", y GitHub)
@@ -36,6 +38,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+def clean_text(text):
+    # Reemplazar guiones y otros caracteres similares por espacios
+    return re.sub(r'[\-\u2010\u2011\u2012\u2013\u2014\u2015]', ' ', text)
 
 
 # Cargar variables de entorno desde el archivo .env
@@ -78,9 +83,15 @@ def search_text_in_pdf(pdf_file_id, text):
 
         pdf_data.seek(0)
         reader = PyPDF2.PdfReader(pdf_data)
+        # Limpiar la cadena de texto a buscar (esto es interno, no modifica el texto ingresado por el usuario)
+        cleaned_search_text = clean_text(text.lower())
+
         for page_num in range(len(reader.pages)):
             page = reader.pages[page_num]
-            if text.lower() in page.extract_text().lower():
+            # Limpiar el texto extraído del PDF antes de buscar
+            page_text = clean_text(page.extract_text().lower())
+            # Comparar el texto limpio con el texto buscado
+            if cleaned_search_text in page_text:
                 return True
     except Exception as e:
         st.error(f"Error al buscar en el PDF {pdf_file_id}: {e}")
