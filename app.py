@@ -39,8 +39,10 @@ st.markdown(
 )
 
 def clean_text(text):
-    # Reemplazar guiones, guiones suaves y espacios invisibles por un solo espacio
-    return re.sub(r'[\-\u00AD\u2010\u2011\u2012\u2013\u2014\u2015]', '', text)
+    # Reemplazar guiones, guiones suaves, espacios invisibles o no estándar por un espacio normal
+    # \u00AD: soft hyphen, \u200B: zero-width space, \uFEFF: zero-width no-break space, \u00A0: no-break space
+    return re.sub(r'[\-\u00AD\u2010\u2011\u2012\u2013\u2014\u2015\u200B\uFEFF\u00A0]', '', text)
+
 
 
 # Cargar variables de entorno desde el archivo .env
