@@ -168,19 +168,19 @@ st.markdown("""
 # Mostrar los logos en una fila
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    if st.image("FLY-ENERGY-LOGO.png", use_container_width=False, width=200):
+    if st.image("FLY-ENERGY-LOGO.png", use_column_width=False, width=200):
      if st.button("Fly Energy"):
         search_pdf("Fly Energy")
        
 
 with col2:
-    if st.image("FLY-SOUND-LOGO.png", use_container_width=False, width=200):
+    if st.image("FLY-SOUND-LOGO.png", use_column_width=False, width=200):
       if st.button("Fly Sound"):
          search_pdf("Fly Sound")
      
 
 with col3:
-    if st.image("FLY-TECH-LOGO.png", use_container_width=False, width=200):
+    if st.image("FLY-TECH-LOGO.png", use_column_width=False, width=200):
        if st.button("Fly Tech"):
           search_pdf("Fly Tech")
       
